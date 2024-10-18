@@ -18,6 +18,8 @@ Input: root = [4,2,5,1,3], target = 3.714286
 1   3
 
 Output: 4
+
+But if target is 3.5 and we are asked to return the smallest number which is closest to target, then answer will be 3 and not 4 (both 3 and 4 have the same difference from target but 3 is smaller than 4) .
 ```
 # Implementation 1 : O(nlogn), inorder traversal, sort 
 ```java
