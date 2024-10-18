@@ -19,8 +19,27 @@ Input: root = [4,2,5,1,3], target = 3.714286
 
 Output: 4
 ```
+# Implementation 1 : O(nlogn), inorder traversal, sort 
+```java
+class Solution {
+  public int closestValue(TreeNode root, double target) {
+    List<Integer> nums = new ArrayList();
+    inorder(root, nums);
+    Collections.sort(nums, (n1,n2) -> 
+                      Double.compare(Math.abs(n1 - target), Math.abs(n2 - target)));
+    return nums.get(0);
+  }
 
-# Implementation :
+  public void inorder(TreeNode node, List<Integer> nums) {
+    if (node == null) return;
+    inorder(node.left, nums);
+    nums.add(node.val);
+    inorder(node.right, nums);
+  }
+}
+```
+
+# Implementation 2 : O(n)
 
 ```java
 /**
