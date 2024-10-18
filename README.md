@@ -39,32 +39,37 @@ class Solution {
 }
 ```
 
-# Implementation 2 : O(n)
+# Implementation 2 : O(h)
 
 ```java
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
 class Solution {
     public int closestValue(TreeNode root, double target) {
-        // Note that we are given, that BST would not be empty
         int closestValue = root.val;
-        while(root != null){
-            if(Math.abs(root.val - target) < Math.abs(closestValue - target))
-                closestValue = root.val;
-            root = target < root.val ? root.left : root.right;
+        TreeNode node = root;
+        while(node != null){
+            if(Math.abs(node.val - target) < Math.abs(closestValue - target))
+                closestValue = node.val;
+            node = target < node.val ? node.left : node.right;
         }
         return closestValue;
     }
-    
 }
-
+```
+# Implementation 3 : O(h), If there are multiple answers, return the smallest number
+```java
+class Solution {
+    public int closestValue(TreeNode root, double target) {
+        int closestValue = root.val;
+        TreeNode node = root;
+        while(node != null){
+            if(Math.abs(node.val - target) < Math.abs(closestValue - target) ||
+               (Math.abs(node.val - target) == Math.abs(closestValue - target) && node.val < closestValue))
+                closestValue = node.val;
+            node = target < node.val ? node.left : node.right;
+        }
+        return closestValue;
+    }
+}
 ```
 
 # References :
